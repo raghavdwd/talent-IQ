@@ -21,6 +21,7 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 import { connectDB } from "./lib/db.js";
 import { protectRoute } from "./middlewares/protectRoute.js";
 import chatRoute from "./routes/chat.route.js";
+import sessionRoute from "./routes/session.route.js";
 
 app.get("/api/health", (req, res) => {
   res.send("api is running");
@@ -31,6 +32,7 @@ app.use("/api/auth", protectRoute, (req, res) => {
 });
 
 app.use("/api/chat", protectRoute, chatRoute);
+app.use("/api/sessions", protectRoute, sessionRoute);
 
 //make our app ready for production
 if (ENV.NODE_ENV === "production") {
